@@ -1,5 +1,3 @@
-
-Ahora:
 El CAPTCHA muestra un código de texto alfanumérico de 5 caracteres.
 
 Ejemplo:
@@ -9,10 +7,6 @@ El usuario debe escribir:
 R7K2P
 
 No importa si se escribe en mayúsculas o minúsculas.
-
-Archivos modificados:
-1. src/main/java/mx/unadm/rupe/service/CaptchaService.java
-2. src/main/resources/templates/login.html
 
 Credenciales:
 Usuario: usadminrupe@rupe.com
