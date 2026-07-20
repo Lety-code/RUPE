@@ -3,7 +3,7 @@ El CAPTCHA muestra un código de texto alfanumérico de 5 caracteres.
 Ejemplo:
 Código mostrado: R7K2P
 
-El usuario debe escribir:
+El administrador debe escribir:
 R7K2P
 
 No importa si se escribe en mayúsculas o minúsculas.
