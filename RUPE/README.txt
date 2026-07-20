@@ -1,5 +1,4 @@
-RUPE AVANCE FUNCIONAL
-
+RUPE AVANCE
 Incluye:
 - Registro básico de perro extraviado.
 - Generación de folio.
