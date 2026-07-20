@@ -1,11 +1,3 @@
-CAMBIO REALIZADO AL CAPTCHA
-
-Esta versión del 50% del sistema RUPE usa un CAPTCHA diferente.
-
-Antes:
-El CAPTCHA era una suma matemática.
-
-Ahora:
 El CAPTCHA muestra un código de texto alfanumérico de 5 caracteres.
 
 Ejemplo:
