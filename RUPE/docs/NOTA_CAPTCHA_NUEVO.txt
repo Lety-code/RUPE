@@ -1,0 +1,26 @@
+NOTA DE ACTUALIZACIÓN DEL SISTEMA RUPE
+
+Se quitó la leyenda visible: Avance 50%.
+
+También se agregó un CAPTCHA nuevo de texto alfanumérico.
+
+Funcionamiento del CAPTCHA:
+
+El sistema muestra un código de 5 caracteres, por ejemplo:
+
+R7K2P
+
+El usuario debe escribir el mismo código para poder iniciar sesión.
+
+Credenciales de administrador:
+
+Usuario: usadminrupe@rupe.com
+Contraseña: rupe987
+
+URL local del sistema:
+
+http://localhost:8080
+
+URL del panel administrativo:
+
+http://localhost:8080/admin/login
