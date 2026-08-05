@@ -1,1 +1,1 @@
-web: java -jar target/rupe-1.0.0.jar
+web: java -jar target/rupe-50-entrega-1.0.0.jar
