@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>RUPE - Proyecto Terminal II</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<header class="encabezado">
+    <h1>RUPE - Proyecto Terminal II</h1>
+    <p>Registro Único de Perros Extraviados</p>
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/reportes/nuevo">Registrar perro</a>
+        <a href="/reportes/consulta">Consultar folio</a>
+        <a href="/admin/login">Administración</a>
+    </nav>
+</header>
+<main class="contenedor">
+
+<section class="tarjeta">
+    <h2>Reporte registrado correctamente</h2>
+    <div class="alerta exito">
+        El reporte fue guardado y se generó el folio:
+        <strong th:text="${reporte.folio}">RUPE-2026-0001</strong>
+    </div>
+    <p>Conserve este folio para consultar el reporte.</p>
+    <a class="boton" th:href="@{'/reportes/' + ${reporte.folio}}">Ver detalle del reporte</a>
+    <a class="boton secundario" href="/reportes/consulta">Consultar otro folio</a>
+</section>
+
+</main>
+<footer>
+    RUPE - Proyecto Terminal II
+</footer>
+</body>
+</html>

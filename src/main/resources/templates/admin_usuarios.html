@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>RUPE - Proyecto Terminal II</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<header class="encabezado">
+    <h1>RUPE - Proyecto Terminal II</h1>
+    <p>Registro Único de Perros Extraviados</p>
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/reportes/nuevo">Registrar perro</a>
+        <a href="/reportes/consulta">Consultar folio</a>
+        <a href="/admin/login">Administración</a>
+    </nav>
+</header>
+<main class="contenedor">
+
+<section class="tarjeta">
+    <h2>Usuarios del sistema</h2>
+    <table>
+        <thead>
+        <tr><th>Nombre</th><th>Correo</th><th>Rol</th><th>Estado</th></tr>
+        </thead>
+        <tbody>
+        <tr th:each="u : ${usuarios}">
+            <td th:text="${u.nombre}"></td>
+            <td th:text="${u.correo}"></td>
+            <td th:text="${u.rol.nombre}"></td>
+            <td th:text="${u.activo ? 'Activo' : 'Inactivo'}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="boton secundario" href="/admin/dashboard">Volver al panel</a>
+</section>
+
+</main>
+<footer>
+    RUPE - Proyecto Terminal II
+</footer>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>RUPE - Proyecto Terminal II</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<header class="encabezado">
+    <h1>RUPE - Proyecto Terminal II</h1>
+    <p>Registro Único de Perros Extraviados</p>
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/reportes/nuevo">Registrar perro</a>
+        <a href="/reportes/consulta">Consultar folio</a>
+        <a href="/admin/login">Administración</a>
+    </nav>
+</header>
+<main class="contenedor">
+
+<section class="tarjeta">
+    <h2>Detalle del reporte</h2>
+    <p><strong>Folio:</strong> <span th:text="${reporte.folio}"></span></p>
+    <p><strong>Estado:</strong> <span th:text="${reporte.estado}"></span></p>
+
+    <h3>Datos del perro</h3>
+    <p><strong>Nombre:</strong> <span th:text="${reporte.perro.nombre}"></span></p>
+    <p><strong>Raza:</strong> <span th:text="${reporte.perro.raza}"></span></p>
+    <p><strong>Color:</strong> <span th:text="${reporte.perro.color}"></span></p>
+    <p><strong>Tamaño:</strong> <span th:text="${reporte.perro.tamano}"></span></p>
+    <p><strong>Sexo:</strong> <span th:text="${reporte.perro.sexo}"></span></p>
+    <p><strong>Señas:</strong> <span th:text="${reporte.perro.senasParticulares}"></span></p>
+
+    <h3>Datos del tutor</h3>
+    <p><strong>Nombre:</strong> <span th:text="${reporte.tutor.nombre}"></span></p>
+    <p><strong>Teléfono:</strong> <span th:text="${reporte.tutor.telefono}"></span></p>
+    <p><strong>Correo:</strong> <span th:text="${reporte.tutor.correo}"></span></p>
+
+    <h3>Datos del extravío</h3>
+    <p><strong>Fecha:</strong> <span th:text="${reporte.fechaExtravio}"></span></p>
+    <p><strong>Lugar:</strong> <span th:text="${reporte.lugarExtravio}"></span></p>
+    <p><strong>Descripción:</strong> <span th:text="${reporte.descripcion}"></span></p>
+</section>
+
+</main>
+<footer>
+    RUPE - Proyecto Terminal II
+</footer>
+</body>
+</html>

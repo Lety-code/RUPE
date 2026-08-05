@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>RUPE - Proyecto Terminal II</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<header class="encabezado">
+    <h1>RUPE - Proyecto Terminal II</h1>
+    <p>Registro Único de Perros Extraviados</p>
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/reportes/nuevo">Registrar perro</a>
+        <a href="/reportes/consulta">Consultar folio</a>
+        <a href="/admin/login">Administración</a>
+    </nav>
+</header>
+<main class="contenedor">
+
+<section class="tarjeta login">
+    <h2>Acceso administrativo</h2>
+    <div th:if="${param.salida}" class="alerta exito">Sesión cerrada correctamente.</div>
+    <div th:if="${error}" class="alerta error" th:text="${error}"></div>
+
+    <form method="post" action="/admin/login" class="formulario">
+        <label>Correo</label>
+        <input type="email" name="correo" required>
+
+        <label>Contraseña</label>
+        <input type="password" name="password" required>
+
+        <label>CAPTCHA</label>
+        <div class="captcha" th:text="${captcha}">A1B2C</div>
+        <input type="text" name="captcha" required placeholder="Escriba el CAPTCHA">
+
+        <button class="boton" type="submit">Entrar</button>
+    </form>
+</section>
+
+</main>
+<footer>
+    RUPE - Proyecto Terminal II
+</footer>
+</body>
+</html>

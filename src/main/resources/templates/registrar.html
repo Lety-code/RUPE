@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>RUPE - Proyecto Terminal II</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<header class="encabezado">
+    <h1>RUPE - Proyecto Terminal II</h1>
+    <p>Registro Único de Perros Extraviados</p>
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/reportes/nuevo">Registrar perro</a>
+        <a href="/reportes/consulta">Consultar folio</a>
+        <a href="/admin/login">Administración</a>
+    </nav>
+</header>
+<main class="contenedor">
+
+<section class="tarjeta">
+    <h2>Registrar perro extraviado</h2>
+    <div th:if="${error}" class="alerta error" th:text="${error}"></div>
+
+    <form method="post" action="/reportes/guardar" class="formulario">
+        <h3>Datos del tutor</h3>
+        <label>Nombre del tutor *</label>
+        <input type="text" name="tutorNombre" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{3,120}" title="Escriba sólo letras y espacios.">
+
+        <label>Teléfono *</label>
+        <input type="tel" name="tutorTelefono" required pattern="[0-9]{10}" maxlength="10" title="Escriba 10 números.">
+
+        <label>Correo electrónico</label>
+        <input type="email" name="tutorCorreo" placeholder="correo@ejemplo.com">
+
+        <label>Dirección</label>
+        <input type="text" name="tutorDireccion">
+
+        <h3>Datos del perro</h3>
+        <label>Nombre del perro *</label>
+        <input type="text" name="perroNombre" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,80}" title="Escriba sólo letras y espacios.">
+
+        <label>Raza</label>
+        <input type="text" name="raza">
+
+        <label>Color</label>
+        <input type="text" name="color">
+
+        <label>Tamaño</label>
+        <select name="tamano">
+            <option value="">Seleccione</option>
+            <option>Pequeño</option>
+            <option>Mediano</option>
+            <option>Grande</option>
+        </select>
+
+        <label>Sexo</label>
+        <select name="sexo">
+            <option value="">Seleccione</option>
+            <option>Macho</option>
+            <option>Hembra</option>
+        </select>
+
+        <label>Señas particulares</label>
+        <textarea name="senas" rows="3"></textarea>
+
+        <h3>Datos del extravío</h3>
+        <label>Fecha de extravío</label>
+        <input type="date" name="fechaExtravio">
+
+        <label>Lugar de extravío *</label>
+        <input type="text" name="lugarExtravio" required>
+
+        <label>Descripción</label>
+        <textarea name="descripcion" rows="4"></textarea>
+
+        <button class="boton" type="submit">Guardar reporte</button>
+        <a class="boton secundario" href="/">Cancelar</a>
+    </form>
+</section>
+
+</main>
+<footer>
+    RUPE - Proyecto Terminal II
+</footer>
+</body>
+</html>
