@@ -1,0 +1,26 @@
+PLAN DE PRUEBAS DE CAJA NEGRA DEL 50%
+
+Se aplican 16 pruebas de caja negra:
+
+PT-01. Acceso al formulario de registro.
+PT-02. Captura de datos del tutor.
+PT-03. Captura de datos del perro.
+PT-04. Captura de datos del extravío.
+PT-05. Registro completo y generación de folio.
+PT-06. Consulta por folio existente.
+PT-07. Consulta por folio inexistente.
+PT-08. Visualización del login administrativo.
+PT-09. Login con credenciales válidas.
+PT-10. Login con credenciales incorrectas.
+PT-11. Validación de CAPTCHA.
+PT-12. Visualización del panel administrativo.
+PT-13. Consulta de usuarios.
+PT-14. Consulta de bitácora.
+PT-15. Cierre de sesión administrativo.
+PT-16. Validación del sistema en Railway.
+
+Resultado esperado:
+16 pruebas ejecutadas.
+16 pruebas aprobadas.
+0 pruebas no aprobadas.
+100% de aprobación en el conjunto de pruebas aplicadas.

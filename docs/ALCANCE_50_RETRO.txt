@@ -1,0 +1,36 @@
+ALCANCE DEL 50% DEL SISTEMA RUPE TOMANDO EN CUENTA RETROALIMENTACIÓN
+
+El sistema se entrega con un alcance del 50% para evaluación.
+
+Módulos obligatorios incluidos:
+1. Inicio.
+2. Registro de perro extraviado.
+3. Confirmación de folio.
+4. Consulta por folio.
+5. Detalle del reporte.
+6. Login administrativo.
+7. CAPTCHA.
+8. Panel administrativo.
+9. Usuarios.
+10. Bitácora.
+11. Cierre de sesión.
+
+Retroalimentación atendida:
+1. CAPTCHA integrado.
+2. Mensajes claros al usuario.
+3. Separación entre frontend, backend, lógica de negocio y base de datos.
+4. Base de datos normalizada.
+5. Diccionario de datos.
+6. Estructura MVC.
+7. Interfaz clara, responsive y guinda/blanco.
+8. Variables de entorno para despliegue.
+9. Bitácora de acciones.
+10. Alcance funcional definido.
+
+Mejoras opcionales no incluidas en este 50%:
+1. QR.
+2. PDF.
+3. Exportación Excel o CSV.
+4. Gráficas.
+5. Registro avanzado de pistas.
+6. Pruebas automatizadas complejas.

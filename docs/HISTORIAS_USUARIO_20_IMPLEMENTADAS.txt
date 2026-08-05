@@ -1,0 +1,22 @@
+20 HISTORIAS DE USUARIO IMPLEMENTADAS EN EL 50%
+
+HU-01. Como usuario, quiero ver la página principal.
+HU-02. Como tutor, quiero registrar un perro extraviado.
+HU-03. Como tutor, quiero capturar mis datos.
+HU-04. Como tutor, quiero capturar datos del perro.
+HU-05. Como tutor, quiero registrar fecha de extravío.
+HU-06. Como tutor, quiero registrar lugar de extravío.
+HU-07. Como tutor, quiero agregar descripción del caso.
+HU-08. Como tutor, quiero recibir folio único.
+HU-09. Como tutor, quiero ver confirmación.
+HU-10. Como usuario, quiero consultar por folio.
+HU-11. Como usuario, quiero ver detalle del reporte.
+HU-12. Como administrador, quiero iniciar sesión.
+HU-13. Como administrador, quiero validar credenciales.
+HU-14. Como administrador, quiero resolver CAPTCHA.
+HU-15. Como administrador, quiero ver panel administrativo.
+HU-16. Como administrador, quiero ver total de reportes.
+HU-17. Como administrador, quiero consultar usuarios.
+HU-18. Como administrador, quiero consultar bitácora.
+HU-19. Como administrador, quiero cerrar sesión.
+HU-20. Como usuario, quiero interfaz clara guinda y blanco.
