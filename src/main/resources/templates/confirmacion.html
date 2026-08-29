@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>RUPE - Proyecto Terminal II</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>RUPE</title><link rel="stylesheet" href="/css/styles.css"></head>
 <body>
 <header class="encabezado">
-    <h1>RUPE - Proyecto Terminal II</h1>
+    <h1>RUPE</h1>
     <p>Registro Único de Perros Extraviados</p>
     <nav>
         <a href="/">Inicio</a>
@@ -19,20 +14,19 @@
 </header>
 <main class="contenedor">
 
-<section class="tarjeta">
+<section class="tarjeta centro">
     <h2>Reporte registrado correctamente</h2>
-    <div class="alerta exito">
-        El reporte fue guardado y se generó el folio:
-        <strong th:text="${reporte.folio}">RUPE-2026-0001</strong>
+    <div class="folio" th:text="${reporte.folio}">RUPE-2026-0001</div>
+    <p>Guarda este folio para consultar el reporte después.</p>
+    <img class="qr" th:src="@{'/reportes/' + ${reporte.folio} + '/qr'}" alt="Código QR">
+    <div class="acciones">
+        <a class="boton" th:href="@{'/reportes/' + ${reporte.folio}}">Ver detalle</a>
+        <a class="boton secundario" th:href="@{'/reportes/' + ${reporte.folio} + '/pdf'}">Descargar ficha PDF</a>
+        <a class="boton claro" href="/">Inicio</a>
     </div>
-    <p>Conserve este folio para consultar el reporte.</p>
-    <a class="boton" th:href="@{'/reportes/' + ${reporte.folio}}">Ver detalle del reporte</a>
-    <a class="boton secundario" href="/reportes/consulta">Consultar otro folio</a>
 </section>
 
 </main>
-<footer>
-    RUPE - Proyecto Terminal II
-</footer>
+<footer>RUPE</footer>
 </body>
 </html>

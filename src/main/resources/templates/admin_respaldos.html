@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>RUPE</title><link rel="stylesheet" href="/css/styles.css"></head>
+<body>
+<header class="encabezado">
+    <h1>RUPE</h1>
+    <p>Registro Único de Perros Extraviados</p>
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/reportes/nuevo">Registrar perro</a>
+        <a href="/reportes/consulta">Consultar folio</a>
+        <a href="/admin/login">Administración</a>
+    </nav>
+</header>
+<main class="contenedor">
+
+<section class="tarjeta">
+    <h2>Respaldos</h2>
+    <form method="post" action="/admin/respaldos">
+        <button class="boton" type="submit">Crear respaldo informativo</button>
+    </form>
+    <table>
+        <thead><tr><th>Archivo</th><th>Ruta</th><th>Usuario</th><th>Fecha</th></tr></thead>
+        <tbody>
+        <tr th:each="r : ${respaldos}">
+            <td th:text="${r.nombreArchivo}"></td><td th:text="${r.rutaArchivo}"></td><td th:text="${r.usuario}"></td><td th:text="${r.fechaGeneracion}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="boton secundario" href="/admin/dashboard">Volver</a>
+</section>
+
+</main>
+<footer>RUPE</footer>
+</body>
+</html>

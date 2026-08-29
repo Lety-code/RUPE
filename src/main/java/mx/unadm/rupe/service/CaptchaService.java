@@ -17,9 +17,6 @@ public class CaptchaService {
     }
 
     public boolean validar(String esperado, String respuesta) {
-        if (esperado == null || respuesta == null) {
-            return false;
-        }
-        return esperado.trim().equalsIgnoreCase(respuesta.trim());
+        return esperado != null && respuesta != null && esperado.trim().equalsIgnoreCase(respuesta.trim());
     }
 }

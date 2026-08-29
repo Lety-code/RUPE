@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>RUPE - Proyecto Terminal II</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>RUPE</title><link rel="stylesheet" href="/css/styles.css"></head>
 <body>
 <header class="encabezado">
-    <h1>RUPE - Proyecto Terminal II</h1>
+    <h1>RUPE</h1>
     <p>Registro Único de Perros Extraviados</p>
     <nav>
         <a href="/">Inicio</a>
@@ -25,17 +20,20 @@
         <div class="contador"><strong th:text="${totalReportes}">0</strong><span>Total reportes</span></div>
         <div class="contador"><strong th:text="${reportesAbiertos}">0</strong><span>Abiertos</span></div>
         <div class="contador"><strong th:text="${reportesLocalizados}">0</strong><span>Localizados</span></div>
+        <div class="contador"><strong th:text="${reportesCerrados}">0</strong><span>Cerrados</span></div>
     </div>
-    <div class="acciones">
+    <div class="acciones menu-admin">
+        <a class="boton" href="/admin/reportes">Reportes</a>
         <a class="boton" href="/admin/usuarios">Usuarios</a>
         <a class="boton" href="/admin/bitacora">Bitácora</a>
+        <a class="boton" href="/admin/graficas">Gráficas</a>
+        <a class="boton" href="/admin/exportar">Exportar CSV</a>
+        <a class="boton" href="/admin/respaldos">Respaldos</a>
         <a class="boton secundario" href="/admin/logout">Cerrar sesión</a>
     </div>
 </section>
 
 </main>
-<footer>
-    RUPE - Proyecto Terminal II
-</footer>
+<footer>RUPE</footer>
 </body>
 </html>

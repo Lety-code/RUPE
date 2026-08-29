@@ -1,0 +1,10 @@
+target/*
+!target/
+!target/rupe-100-completo.jar
+uploads/
+data/
+*.log
+.idea/
+.vscode/
+*.iml
+.env

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "bitacora")
+@Table(name = "bitacora", indexes = @Index(name = "idx_bitacora_fecha", columnList = "fecha_hora"))
 public class Bitacora {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,19 +22,19 @@ public class Bitacora {
     @Column(length = 50)
     private String ip;
 
+    @Column(nullable = false)
     private LocalDateTime fechaHora = LocalDateTime.now();
 
     public Long getId() { return id; }
-    public String getUsuario() { return usuario; }
-    public String getModulo() { return modulo; }
-    public String getAccion() { return accion; }
-    public String getIp() { return ip; }
-    public LocalDateTime getFechaHora() { return fechaHora; }
-
     public void setId(Long id) { this.id = id; }
+    public String getUsuario() { return usuario; }
     public void setUsuario(String usuario) { this.usuario = usuario; }
+    public String getModulo() { return modulo; }
     public void setModulo(String modulo) { this.modulo = modulo; }
+    public String getAccion() { return accion; }
     public void setAccion(String accion) { this.accion = accion; }
+    public String getIp() { return ip; }
     public void setIp(String ip) { this.ip = ip; }
+    public LocalDateTime getFechaHora() { return fechaHora; }
     public void setFechaHora(LocalDateTime fechaHora) { this.fechaHora = fechaHora; }
 }

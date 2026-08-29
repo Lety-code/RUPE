@@ -1,20 +1,28 @@
 package mx.unadm.rupe.config;
 
+import mx.unadm.rupe.model.ConfiguracionSistema;
 import mx.unadm.rupe.model.Rol;
 import mx.unadm.rupe.model.Usuario;
+import mx.unadm.rupe.repository.ConfiguracionSistemaRepository;
 import mx.unadm.rupe.repository.RolRepository;
 import mx.unadm.rupe.repository.UsuarioRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
     private final RolRepository rolRepository;
     private final UsuarioRepository usuarioRepository;
+    private final ConfiguracionSistemaRepository configuracionRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public DataInitializer(RolRepository rolRepository, UsuarioRepository usuarioRepository) {
+    public DataInitializer(RolRepository rolRepository, UsuarioRepository usuarioRepository,
+                           ConfiguracionSistemaRepository configuracionRepository, PasswordEncoder passwordEncoder) {
         this.rolRepository = rolRepository;
         this.usuarioRepository = usuarioRepository;
+        this.configuracionRepository = configuracionRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -26,14 +34,28 @@ public class DataInitializer implements CommandLineRunner {
             return rolRepository.save(r);
         });
 
-        usuarioRepository.findByCorreo("usadminrupe@rupe.com").orElseGet(() -> {
+        if (!usuarioRepository.existsByCorreoIgnoreCase("usadminrupe@rupe.com")) {
             Usuario u = new Usuario();
             u.setNombre("Administrador RUPE");
             u.setCorreo("usadminrupe@rupe.com");
-            u.setPassword("rupe987");
+            u.setPassword(passwordEncoder.encode("rupe987"));
             u.setActivo(true);
             u.setRol(admin);
-            return usuarioRepository.save(u);
+            usuarioRepository.save(u);
+        }
+
+        crearConfiguracion("APP_NOMBRE", "RUPE", "Nombre corto del sistema");
+        crearConfiguracion("LOGIN_MAX_INTENTOS", "5", "Intentos permitidos antes de bloqueo temporal");
+        crearConfiguracion("FOLIO_PREFIJO", "RUPE", "Prefijo usado en los folios");
+    }
+
+    private void crearConfiguracion(String clave, String valor, String descripcion) {
+        configuracionRepository.findByClave(clave).orElseGet(() -> {
+            ConfiguracionSistema c = new ConfiguracionSistema();
+            c.setClave(clave);
+            c.setValor(valor);
+            c.setDescripcion(descripcion);
+            return configuracionRepository.save(c);
         });
     }
 }

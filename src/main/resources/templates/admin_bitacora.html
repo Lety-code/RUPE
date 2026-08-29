@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>RUPE - Proyecto Terminal II</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>RUPE</title><link rel="stylesheet" href="/css/styles.css"></head>
 <body>
 <header class="encabezado">
-    <h1>RUPE - Proyecto Terminal II</h1>
+    <h1>RUPE</h1>
     <p>Registro Único de Perros Extraviados</p>
     <nav>
         <a href="/">Inicio</a>
@@ -20,27 +15,19 @@
 <main class="contenedor">
 
 <section class="tarjeta">
-    <h2>Bitácora del sistema</h2>
+    <h2>Bitácora</h2>
     <table>
-        <thead>
-        <tr><th>Fecha</th><th>Usuario</th><th>Módulo</th><th>Acción</th><th>IP</th></tr>
-        </thead>
+        <thead><tr><th>Fecha</th><th>Usuario</th><th>Módulo</th><th>Acción</th><th>IP</th></tr></thead>
         <tbody>
         <tr th:each="a : ${acciones}">
-            <td th:text="${a.fechaHora}"></td>
-            <td th:text="${a.usuario}"></td>
-            <td th:text="${a.modulo}"></td>
-            <td th:text="${a.accion}"></td>
-            <td th:text="${a.ip}"></td>
+            <td th:text="${a.fechaHora}"></td><td th:text="${a.usuario}"></td><td th:text="${a.modulo}"></td><td th:text="${a.accion}"></td><td th:text="${a.ip}"></td>
         </tr>
         </tbody>
     </table>
-    <a class="boton secundario" href="/admin/dashboard">Volver al panel</a>
+    <a class="boton secundario" href="/admin/dashboard">Volver</a>
 </section>
 
 </main>
-<footer>
-    RUPE - Proyecto Terminal II
-</footer>
+<footer>RUPE</footer>
 </body>
 </html>

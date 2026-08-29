@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>RUPE</title><link rel="stylesheet" href="/css/styles.css"></head>
+<body>
+<header class="encabezado">
+    <h1>RUPE</h1>
+    <p>Registro Único de Perros Extraviados</p>
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/reportes/nuevo">Registrar perro</a>
+        <a href="/reportes/consulta">Consultar folio</a>
+        <a href="/admin/login">Administración</a>
+    </nav>
+</header>
+<main class="contenedor">
+
+<section class="tarjeta">
+    <h2>Reportes registrados</h2>
+    <table>
+        <thead><tr><th>Folio</th><th>Perro</th><th>Fecha</th><th>Lugar</th><th>Estado</th><th>Acciones</th></tr></thead>
+        <tbody>
+        <tr th:each="r : ${reportes}">
+            <td th:text="${r.folio}"></td>
+            <td th:text="${r.perro.nombre}"></td>
+            <td th:text="${r.fechaExtravio}"></td>
+            <td th:text="${r.lugarExtravio}"></td>
+            <td th:text="${r.estado}"></td>
+            <td>
+                <form method="post" th:action="@{'/admin/reportes/' + ${r.id} + '/estado'}">
+                    <select name="estado">
+                        <option>ABIERTO</option><option>EN_REVISION</option><option>CON_PISTA</option><option>RESGUARDADO</option><option>LOCALIZADO</option><option>CERRADO</option><option>CANCELADO</option>
+                    </select>
+                    <button class="mini" type="submit">Cambiar</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="boton secundario" href="/admin/dashboard">Volver</a>
+</section>
+
+</main>
+<footer>RUPE</footer>
+</body>
+</html>

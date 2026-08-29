@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>RUPE - Proyecto Terminal II</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>RUPE</title><link rel="stylesheet" href="/css/styles.css"><script defer src="/js/validaciones_rupe.js"></script></head>
 <body>
 <header class="encabezado">
-    <h1>RUPE - Proyecto Terminal II</h1>
+    <h1>RUPE</h1>
     <p>Registro Único de Perros Extraviados</p>
     <nav>
         <a href="/">Inicio</a>
@@ -22,31 +17,24 @@
 <section class="tarjeta">
     <h2>Registrar perro extraviado</h2>
     <div th:if="${error}" class="alerta error" th:text="${error}"></div>
-
-    <form method="post" action="/reportes/guardar" class="formulario">
+    <form method="post" action="/reportes/guardar" class="formulario" enctype="multipart/form-data">
         <h3>Datos del tutor</h3>
         <label>Nombre del tutor *</label>
-        <input type="text" name="tutorNombre" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{3,120}" title="Escriba sólo letras y espacios.">
-
+        <input type="text" name="tutorNombre" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü\s]{2,120}" title="Escriba sólo letras y espacios.">
         <label>Teléfono *</label>
         <input type="tel" name="tutorTelefono" required pattern="[0-9]{10}" maxlength="10" title="Escriba 10 números.">
-
         <label>Correo electrónico</label>
         <input type="email" name="tutorCorreo" placeholder="correo@ejemplo.com">
-
         <label>Dirección</label>
-        <input type="text" name="tutorDireccion">
+        <input type="text" name="tutorDireccion" maxlength="250">
 
         <h3>Datos del perro</h3>
         <label>Nombre del perro *</label>
-        <input type="text" name="perroNombre" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,80}" title="Escriba sólo letras y espacios.">
-
+        <input type="text" name="perroNombre" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü\s]{2,80}" title="Escriba sólo letras y espacios.">
         <label>Raza</label>
-        <input type="text" name="raza">
-
-        <label>Color</label>
-        <input type="text" name="color">
-
+        <input type="text" name="raza" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü\s]{0,80}" title="Escriba sólo letras y espacios.">
+        <label>Color *</label>
+        <input type="text" name="color" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü\s]{3,80}" title="El color es obligatorio y sólo acepta letras. No escriba números ni signos.">
         <label>Tamaño</label>
         <select name="tamano">
             <option value="">Seleccione</option>
@@ -54,35 +42,29 @@
             <option>Mediano</option>
             <option>Grande</option>
         </select>
-
         <label>Sexo</label>
         <select name="sexo">
             <option value="">Seleccione</option>
             <option>Macho</option>
             <option>Hembra</option>
         </select>
-
-        <label>Señas particulares</label>
-        <textarea name="senas" rows="3"></textarea>
+        <label>Señas particulares *</label>
+        <textarea name="senas" required rows="3" minlength="5" maxlength="300" title="Las señas son obligatorias. No use números ni signos."></textarea>
+        <label>Fotografía del perro</label>
+        <input type="file" name="foto" accept="image/png,image/jpeg,image/webp">
 
         <h3>Datos del extravío</h3>
-        <label>Fecha de extravío</label>
-        <input type="date" name="fechaExtravio">
-
+        <label>Fecha de extravío *</label>
+        <input type="date" name="fechaExtravio" required min="1900-01-01" title="La fecha es obligatoria y debe tener año de 4 dígitos.">
         <label>Lugar de extravío *</label>
-        <input type="text" name="lugarExtravio" required>
-
+        <input type="text" name="lugarExtravio" required maxlength="250">
         <label>Descripción</label>
-        <textarea name="descripcion" rows="4"></textarea>
-
+        <textarea name="descripcion" rows="3"></textarea>
         <button class="boton" type="submit">Guardar reporte</button>
-        <a class="boton secundario" href="/">Cancelar</a>
     </form>
 </section>
 
 </main>
-<footer>
-    RUPE - Proyecto Terminal II
-</footer>
+<footer>RUPE</footer>
 </body>
 </html>

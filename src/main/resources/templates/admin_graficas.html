@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>RUPE</title><link rel="stylesheet" href="/css/styles.css"></head>
+<body>
+<header class="encabezado">
+    <h1>RUPE</h1>
+    <p>Registro Único de Perros Extraviados</p>
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/reportes/nuevo">Registrar perro</a>
+        <a href="/reportes/consulta">Consultar folio</a>
+        <a href="/admin/login">Administración</a>
+    </nav>
+</header>
+<main class="contenedor">
+
+<section class="tarjeta">
+    <h2>Gráficas administrativas</h2>
+    <p>Resumen visual de reportes por estado.</p>
+    <div class="barra"><span>Abiertos</span><div><b th:style="'width:' + ${abiertos * 20 + 10} + 'px'" th:text="${abiertos}"></b></div></div>
+    <div class="barra"><span>Localizados</span><div><b th:style="'width:' + ${localizados * 20 + 10} + 'px'" th:text="${localizados}"></b></div></div>
+    <div class="barra"><span>Cerrados</span><div><b th:style="'width:' + ${cerrados * 20 + 10} + 'px'" th:text="${cerrados}"></b></div></div>
+    <a class="boton secundario" href="/admin/dashboard">Volver</a>
+</section>
+
+</main>
+<footer>RUPE</footer>
+</body>
+</html>

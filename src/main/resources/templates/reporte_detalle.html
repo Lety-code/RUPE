@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>RUPE - Proyecto Terminal II</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>RUPE</title><link rel="stylesheet" href="/css/styles.css"></head>
 <body>
 <header class="encabezado">
-    <h1>RUPE - Proyecto Terminal II</h1>
+    <h1>RUPE</h1>
     <p>Registro Único de Perros Extraviados</p>
     <nav>
         <a href="/">Inicio</a>
@@ -20,32 +15,63 @@
 <main class="contenedor">
 
 <section class="tarjeta">
-    <h2>Detalle del reporte</h2>
-    <p><strong>Folio:</strong> <span th:text="${reporte.folio}"></span></p>
-    <p><strong>Estado:</strong> <span th:text="${reporte.estado}"></span></p>
+    <h2>Detalle público del reporte</h2>
+    <div class="detalle">
+        <p><strong>Folio:</strong> <span th:text="${reporte.folio}"></span></p>
+        <p><strong>Estado:</strong> <span th:text="${reporte.estado}"></span></p>
+        <p><strong>Perro:</strong> <span th:text="${reporte.perro.nombre}"></span></p>
+        <p><strong>Raza:</strong> <span th:text="${reporte.perro.raza}"></span></p>
+        <p><strong>Color:</strong> <span th:text="${reporte.perro.color}"></span></p>
+        <p><strong>Tamaño:</strong> <span th:text="${reporte.perro.tamano}"></span></p>
+        <p><strong>Sexo:</strong> <span th:text="${reporte.perro.sexo}"></span></p>
+        <p><strong>Señas particulares:</strong> <span th:text="${reporte.perro.senasParticulares}"></span></p>
+        <p><strong>Fecha de extravío:</strong> <span th:text="${reporte.fechaExtravio}"></span></p>
+        <p><strong>Lugar de extravío:</strong> <span th:text="${reporte.lugarExtravio}"></span></p>
+        <p><strong>Descripción:</strong> <span th:text="${reporte.descripcion}"></span></p>
+        <img th:if="${reporte.perro.fotoRuta}" class="foto" th:src="${reporte.perro.fotoRuta}" alt="Foto del perro">
+    </div>
+    <p class="privacidad">Por privacidad, no se muestran teléfono, correo ni dirección del tutor.</p>
+    <div class="acciones">
+        <a class="boton" th:href="@{'/reportes/' + ${reporte.folio} + '/pdf'}">Descargar ficha PDF</a>
+        <a class="boton secundario" th:href="@{'/reportes/' + ${reporte.folio} + '/qr'}">Ver QR</a>
+    </div>
+</section>
 
-    <h3>Datos del perro</h3>
-    <p><strong>Nombre:</strong> <span th:text="${reporte.perro.nombre}"></span></p>
-    <p><strong>Raza:</strong> <span th:text="${reporte.perro.raza}"></span></p>
-    <p><strong>Color:</strong> <span th:text="${reporte.perro.color}"></span></p>
-    <p><strong>Tamaño:</strong> <span th:text="${reporte.perro.tamano}"></span></p>
-    <p><strong>Sexo:</strong> <span th:text="${reporte.perro.sexo}"></span></p>
-    <p><strong>Señas:</strong> <span th:text="${reporte.perro.senasParticulares}"></span></p>
+<section class="tarjeta">
+    <h2>Registrar pista o avistamiento</h2>
+    <div th:if="${error}" class="alerta error" th:text="${error}"></div>
+    <form class="formulario" method="post" th:action="@{'/reportes/' + ${reporte.folio} + '/pistas'}" enctype="multipart/form-data">
+        <label>Lugar donde fue visto *</label>
+        <input type="text" name="lugar" required>
+        <label>Fecha</label>
+        <input type="date" name="fecha">
+        <label>Hora</label>
+        <input type="time" name="hora">
+        <label>Descripción</label>
+        <textarea name="descripcion" rows="3"></textarea>
+        <label><input type="checkbox" name="resguardado" value="true"> El perro está resguardado</label>
+        <label>Foto de la pista</label>
+        <input type="file" name="foto" accept="image/png,image/jpeg,image/webp">
+        <button class="boton" type="submit">Guardar pista</button>
+    </form>
+</section>
 
-    <h3>Datos del tutor</h3>
-    <p><strong>Nombre:</strong> <span th:text="${reporte.tutor.nombre}"></span></p>
-    <p><strong>Teléfono:</strong> <span th:text="${reporte.tutor.telefono}"></span></p>
-    <p><strong>Correo:</strong> <span th:text="${reporte.tutor.correo}"></span></p>
-
-    <h3>Datos del extravío</h3>
-    <p><strong>Fecha:</strong> <span th:text="${reporte.fechaExtravio}"></span></p>
-    <p><strong>Lugar:</strong> <span th:text="${reporte.lugarExtravio}"></span></p>
-    <p><strong>Descripción:</strong> <span th:text="${reporte.descripcion}"></span></p>
+<section class="tarjeta">
+    <h2>Pistas registradas</h2>
+    <table>
+        <thead><tr><th>Fecha registro</th><th>Lugar</th><th>Descripción</th><th>Resguardado</th></tr></thead>
+        <tbody>
+        <tr th:each="p : ${pistas}">
+            <td th:text="${p.fechaRegistro}"></td>
+            <td th:text="${p.lugar}"></td>
+            <td th:text="${p.descripcion}"></td>
+            <td th:text="${p.resguardado ? 'Sí' : 'No'}"></td>
+        </tr>
+        </tbody>
+    </table>
 </section>
 
 </main>
-<footer>
-    RUPE - Proyecto Terminal II
-</footer>
+<footer>RUPE</footer>
 </body>
 </html>
