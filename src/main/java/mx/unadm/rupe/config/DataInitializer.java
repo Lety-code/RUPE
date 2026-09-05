@@ -33,6 +33,22 @@ public class DataInitializer implements CommandLineRunner {
             r.setDescripcion("Usuario con acceso al panel administrativo.");
             return rolRepository.save(r);
         });
+        
+        Rol capturista = rolRepository.findByNombre("CAPTURISTA").orElseGet(() -> {
+            Rol r = new Rol();
+            r.setNombre("CAPTURISTA");
+            r.setDescripcion("Usuario autorizado para capturar y actualizar información.");
+            r.setActivo(true);
+            return rolRepository.save(r);
+});
+
+        Rol consulta = rolRepository.findByNombre("CONSULTA").orElseGet(() -> {
+            Rol r = new Rol();
+            r.setNombre("CONSULTA");
+            r.setDescripcion("Usuario con acceso de consulta a la información.");
+            r.setActivo(true);
+            return rolRepository.save(r);
+});
 
         if (!usuarioRepository.existsByCorreoIgnoreCase("usadminrupe@rupe.com")) {
             Usuario u = new Usuario();

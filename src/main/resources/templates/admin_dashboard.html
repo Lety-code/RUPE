@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>RUPE</title><link rel="stylesheet" href="/css/styles.css"></head>
 <body>
 <header class="encabezado">
@@ -19,21 +19,47 @@
     <div class="grid">
         <div class="contador"><strong th:text="${totalReportes}">0</strong><span>Total reportes</span></div>
         <div class="contador"><strong th:text="${reportesAbiertos}">0</strong><span>Abiertos</span></div>
-        <div class="contador"><strong th:text="${reportesLocalizados}">0</strong><span>Localizados</span></div>
+        <div class="contador"><strong th:text="${reportesEnRevision}">0</strong><span>En revisión</span>
+        </div><div class="contador"><strong th:text="${reportesConPista}">0</strong><span>Con pista</span>
+        </div><div class="contador"><strong th:text="${reportesResguardados}">0</strong><span>Resguardados</span>
+        </div><div class="contador"><strong th:text="${reportesLocalizados}">0</strong><span>Localizados</span></div>
         <div class="contador"><strong th:text="${reportesCerrados}">0</strong><span>Cerrados</span></div>
-    </div>
-    <div class="acciones menu-admin">
-        <a class="boton" href="/admin/reportes">Reportes</a>
-        <a class="boton" href="/admin/usuarios">Usuarios</a>
-        <a class="boton" href="/admin/bitacora">Bitácora</a>
-        <a class="boton" href="/admin/graficas">Gráficas</a>
-        <a class="boton" href="/admin/exportar">Exportar CSV</a>
-        <a class="boton" href="/admin/respaldos">Respaldos</a>
-        <a class="boton secundario" href="/admin/logout">Cerrar sesión</a>
-    </div>
+        </div><div class="acciones menu-admin"><a class="boton" href="/admin/reportes">Reportes</a>
+
+    <a class="boton"
+       href="/admin/usuarios"
+       th:if="${rolUsuario == 'ADMINISTRADOR'}">
+        Usuarios
+    </a>
+
+    <a class="boton"
+       href="/admin/bitacora"
+       th:if="${rolUsuario == 'ADMINISTRADOR'}">
+        Bitácora
+    </a>
+
+    <a class="boton" href="/admin/graficas">
+        Gráficas
+    </a>
+
+    <a class="boton" href="/admin/exportar">
+        Exportar CSV
+    </a>
+
+    <a class="boton"
+       href="/admin/respaldos"
+       th:if="${rolUsuario == 'ADMINISTRADOR'}">
+        Respaldos
+    </a>
+
+    <a class="boton secundario" href="/admin/logout">
+        Cerrar sesión
+    </a>
+
+</div>
 </section>
 
 </main>
-<footer>RUPE</footer>
+<footer>RUPE - Proyecto Terminal II</footer>
 </body>
 </html>

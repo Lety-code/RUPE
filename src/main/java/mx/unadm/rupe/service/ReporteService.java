@@ -118,10 +118,33 @@ public class ReporteService {
         return reporteRepository.findAllByOrderByFechaRegistroDesc();
     }
 
-    public long total() { return reporteRepository.count(); }
-    public long abiertos() { return reporteRepository.countByEstado("ABIERTO"); }
-    public long localizados() { return reporteRepository.countByEstado("LOCALIZADO"); }
-    public long cerrados() { return reporteRepository.countByEstado("CERRADO"); }
+    public long total() {
+    return reporteRepository.count();
+}
+
+public long abiertos() {
+    return reporteRepository.countByEstado("ABIERTO");
+}
+
+public long enRevision() {
+    return reporteRepository.countByEstado("EN_REVISION");
+}
+
+public long conPista() {
+    return reporteRepository.countByEstado("CON_PISTA");
+}
+
+public long resguardados() {
+    return reporteRepository.countByEstado("RESGUARDADO");
+}
+
+public long localizados() {
+    return reporteRepository.countByEstado("LOCALIZADO");
+}
+
+public long cerrados() {
+    return reporteRepository.countByEstado("CERRADO");
+}
 
     public ReporteExtravio cambiarEstado(Long id, String nuevoEstado) {
         ReporteExtravio reporte = reporteRepository.findById(id)

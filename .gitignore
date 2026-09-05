@@ -1,10 +1,27 @@
+# Archivos generados por Maven
 target/*
-!target/
 !target/rupe-100-completo.jar
-uploads/
+
+# Datos locales y archivos que NO deben subirse a GitHub
 data/
+uploads/
+respaldos/
+restauracion_tmp/
+restauracion_local_tmp/
+
+# Bases H2 y archivos de diagnóstico
+*.mv.db
+*.trace.db
+
+# Logs y variables privadas
 *.log
+.env
+
+# Archivos de IDE
 .idea/
 .vscode/
 *.iml
-.env
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db

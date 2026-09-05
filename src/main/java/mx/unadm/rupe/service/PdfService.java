@@ -1,6 +1,7 @@
 package mx.unadm.rupe.service;
 
 import com.lowagie.text.Document;
+import com.lowagie.text.Image;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfWriter;
 import mx.unadm.rupe.model.FichaPdf;
@@ -13,10 +14,13 @@ import java.io.ByteArrayOutputStream;
 @Service
 public class PdfService {
     private final FichaPdfRepository fichaPdfRepository;
+    private final QrService qrService;
 
-    public PdfService(FichaPdfRepository fichaPdfRepository) {
-        this.fichaPdfRepository = fichaPdfRepository;
-    }
+    public PdfService(FichaPdfRepository fichaPdfRepository,
+                  QrService qrService) {
+    this.fichaPdfRepository = fichaPdfRepository;
+    this.qrService = qrService;
+}
 
     public byte[] generarFicha(ReporteExtravio r) {
         try {
@@ -38,7 +42,18 @@ public class PdfService {
             document.add(new Paragraph("Fecha de extravío: " + r.getFechaExtravio()));
             document.add(new Paragraph("Lugar de extravío: " + r.getLugarExtravio()));
             document.add(new Paragraph("Descripción: " + valor(r.getDescripcion())));
+            
             document.add(new Paragraph(" "));
+document.add(new Paragraph("Código QR del reporte:"));
+
+byte[] qrBytes = qrService.generarQrPng(r.getFolio());
+Image qrImage = Image.getInstance(qrBytes);
+qrImage.scaleToFit(150, 150);
+qrImage.setAlignment(Image.ALIGN_CENTER);
+document.add(qrImage);
+
+document.add(new Paragraph(" "));
+            
             document.add(new Paragraph("Nota: Por privacidad, no se muestran teléfono, correo ni dirección del tutor."));
             document.close();
 

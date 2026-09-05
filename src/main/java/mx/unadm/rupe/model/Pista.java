@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "pistas")
@@ -52,4 +53,17 @@ public class Pista {
     public void setResguardado(boolean resguardado) { this.resguardado = resguardado; }
     public LocalDateTime getFechaRegistro() { return fechaRegistro; }
     public void setFechaRegistro(LocalDateTime fechaRegistro) { this.fechaRegistro = fechaRegistro; }
+
+    public String getFechaRegistroFormateada() {
+    if (fechaRegistro == null) {
+        return "";
+    }
+
+    DateTimeFormatter formato =
+            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+    return fechaRegistro.format(formato);
 }
+}
+    
+

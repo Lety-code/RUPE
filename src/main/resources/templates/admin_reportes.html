@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>RUPE</title><link rel="stylesheet" href="/css/styles.css"></head>
 <body>
 <header class="encabezado">
@@ -26,13 +26,58 @@
             <td th:text="${r.lugarExtravio}"></td>
             <td th:text="${r.estado}"></td>
             <td>
-                <form method="post" th:action="@{'/admin/reportes/' + ${r.id} + '/estado'}">
-                    <select name="estado">
-                        <option>ABIERTO</option><option>EN_REVISION</option><option>CON_PISTA</option><option>RESGUARDADO</option><option>LOCALIZADO</option><option>CERRADO</option><option>CANCELADO</option>
-                    </select>
-                    <button class="mini" type="submit">Cambiar</button>
-                </form>
-            </td>
+
+    <form th:if="${rolUsuario == 'ADMINISTRADOR' or rolUsuario == 'CAPTURISTA'}"
+          method="post"
+          th:action="@{'/admin/reportes/' + ${r.id} + '/estado'}">
+
+        <select name="estado">
+
+            <option value="ABIERTO"
+                    th:selected="${r.estado == 'ABIERTO'}">
+                ABIERTO
+            </option>
+
+            <option value="EN_REVISION"
+                    th:selected="${r.estado == 'EN_REVISION'}">
+                EN_REVISION
+            </option>
+
+            <option value="CON_PISTA"
+                    th:selected="${r.estado == 'CON_PISTA'}">
+                CON_PISTA
+            </option>
+
+            <option value="RESGUARDADO"
+                    th:selected="${r.estado == 'RESGUARDADO'}">
+                RESGUARDADO
+            </option>
+
+            <option value="LOCALIZADO"
+                    th:selected="${r.estado == 'LOCALIZADO'}">
+                LOCALIZADO
+            </option>
+
+            <option value="CERRADO"
+                    th:selected="${r.estado == 'CERRADO'}">
+                CERRADO
+            </option>
+
+        </select>
+
+        <button class="mini"
+                type="submit">
+            Cambiar
+        </button>
+
+    </form>
+
+
+    <span th:if="${rolUsuario == 'CONSULTA'}">
+        Sólo consulta
+    </span>
+
+</td>
         </tr>
         </tbody>
     </table>
@@ -40,6 +85,6 @@
 </section>
 
 </main>
-<footer>RUPE</footer>
+<footer>RUPE - Proyecto Terminal II</footer>
 </body>
 </html>

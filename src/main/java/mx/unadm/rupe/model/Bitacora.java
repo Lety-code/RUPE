@@ -2,6 +2,7 @@ package mx.unadm.rupe.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "bitacora", indexes = @Index(name = "idx_bitacora_fecha", columnList = "fecha_hora"))
@@ -37,4 +38,16 @@ public class Bitacora {
     public void setIp(String ip) { this.ip = ip; }
     public LocalDateTime getFechaHora() { return fechaHora; }
     public void setFechaHora(LocalDateTime fechaHora) { this.fechaHora = fechaHora; }
+
+public String getFechaHoraFormateada() {
+    if (fechaHora == null) {
+        return "";
+    }
+
+    DateTimeFormatter formato =
+            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+    return fechaHora.format(formato);
+}
+
 }

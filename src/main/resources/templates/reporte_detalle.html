@@ -51,7 +51,43 @@
         <textarea name="descripcion" rows="3"></textarea>
         <label><input type="checkbox" name="resguardado" value="true"> El perro está resguardado</label>
         <label>Foto de la pista</label>
-        <input type="file" name="foto" accept="image/png,image/jpeg,image/webp">
+        
+        <input type="file"
+       name="foto"
+       id="fotoPista"
+       accept="image/png,image/jpeg,image/webp"
+       onchange="mostrarVistaPreviaPista(event)">
+
+<div id="vistaPreviaPista"
+     style="display:none; margin-top:12px;">
+
+    <p><strong>Vista previa de la fotografía:</strong></p>
+
+    <img id="imagenPreviaPista"
+         alt="Vista previa de la fotografía de la pista"
+         style="max-width:220px;
+                max-height:180px;
+                object-fit:cover;
+                border-radius:8px;
+                border:1px solid #cccccc;">
+</div>
+
+<div th:if="${pistas != null and !pistas.isEmpty()
+             and pistas[0].fotoRuta != null
+             and !#strings.isEmpty(pistas[0].fotoRuta)}"
+     style="margin-top:12px;">
+
+    <p><strong>Última fotografía guardada:</strong></p>
+
+    <img th:src="${pistas[0].fotoRuta}"
+         alt="Última fotografía guardada de la pista"
+         style="max-width:220px;
+                max-height:180px;
+                object-fit:cover;
+                border-radius:8px;
+                border:1px solid #cccccc;">
+</div>
+        
         <button class="boton" type="submit">Guardar pista</button>
     </form>
 </section>
@@ -59,19 +95,58 @@
 <section class="tarjeta">
     <h2>Pistas registradas</h2>
     <table>
-        <thead><tr><th>Fecha registro</th><th>Lugar</th><th>Descripción</th><th>Resguardado</th></tr></thead>
-        <tbody>
+    <thead>
+        <tr>
+            <th>Fecha registro</th>
+            <th>Lugar</th>
+            <th>Descripción</th>
+            <th>Resguardado</th>
+            <th>Fotografía</th>
+        </tr>
+    </thead>
+
+    <tbody>
         <tr th:each="p : ${pistas}">
-            <td th:text="${p.fechaRegistro}"></td>
+            <td th:text="${p.fechaRegistroFormateada}"></td>
             <td th:text="${p.lugar}"></td>
             <td th:text="${p.descripcion}"></td>
             <td th:text="${p.resguardado ? 'Sí' : 'No'}"></td>
+
+            <td>
+                <img th:if="${p.fotoRuta != null and !#strings.isEmpty(p.fotoRuta)}"
+                     th:src="${p.fotoRuta}"
+                     alt="Fotografía de la pista"
+                     style="max-width:120px; max-height:100px; object-fit:cover; border-radius:6px;">
+
+                <span th:if="${p.fotoRuta == null or #strings.isEmpty(p.fotoRuta)}">
+                    Sin foto
+                </span>
+            </td>
         </tr>
-        </tbody>
-    </table>
+    </tbody>
+</table>
 </section>
 
 </main>
-<footer>RUPE</footer>
+<footer>RUPE - Proyecto Terminal II</footer>
+
+<script>
+    function mostrarVistaPreviaPista(event) {
+        const archivo = event.target.files[0];
+        const contenedor = document.getElementById("vistaPreviaPista");
+        const imagen = document.getElementById("imagenPreviaPista");
+
+        if (!archivo) {
+            imagen.removeAttribute("src");
+            contenedor.style.display = "none";
+            return;
+        }
+
+        imagen.src = URL.createObjectURL(archivo);
+        contenedor.style.display = "block";
+    }
+</script>
+
+
 </body>
 </html>

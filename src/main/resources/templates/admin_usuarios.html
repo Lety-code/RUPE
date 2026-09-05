@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="es">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>RUPE</title><link rel="stylesheet" href="/css/styles.css"></head>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>RUPE</title>
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
 <body>
+
 <header class="encabezado">
     <h1>RUPE</h1>
     <p>Registro Único de Perros Extraviados</p>
+
     <nav>
         <a href="/">Inicio</a>
         <a href="/reportes/nuevo">Registrar perro</a>
@@ -12,22 +23,140 @@
         <a href="/admin/login">Administración</a>
     </nav>
 </header>
+
 <main class="contenedor">
 
-<section class="tarjeta">
-    <h2>Usuarios</h2>
-    <table>
-        <thead><tr><th>Nombre</th><th>Correo</th><th>Rol</th><th>Activo</th></tr></thead>
-        <tbody>
-        <tr th:each="u : ${usuarios}">
-            <td th:text="${u.nombre}"></td><td th:text="${u.correo}"></td><td th:text="${u.rol.nombre}"></td><td th:text="${u.activo ? 'Sí' : 'No'}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <a class="boton secundario" href="/admin/dashboard">Volver</a>
-</section>
+    <section class="tarjeta">
+
+        <h2>Administración de usuarios</h2>
+
+        <div class="alerta exito"
+             th:if="${mensaje}"
+             th:text="${mensaje}">
+        </div>
+
+        <div class="alerta error"
+             th:if="${error}"
+             th:text="${error}">
+        </div>
+
+        <h3>Crear nuevo usuario</h3>
+
+        <form method="post"
+              th:action="@{/admin/usuarios}"
+              class="formulario">
+
+            <label>Nombre *</label>
+            <input type="text"
+                   name="nombre"
+                   required
+                   maxlength="120">
+
+            <label>Correo electrónico *</label>
+            <input type="email"
+                   name="correo"
+                   required
+                   maxlength="120">
+
+            <label>Contraseña *</label>
+            <input type="password"
+                   name="password"
+                   required
+                   maxlength="120">
+
+            <label>Rol *</label>
+            <select name="rolId" required>
+
+                <option value="">
+                    Seleccione
+                </option>
+
+                <option th:each="r : ${roles}"
+                        th:value="${r.id}"
+                        th:text="${r.nombre}">
+                </option>
+
+            </select>
+
+            <button class="boton"
+                    type="submit">
+                Crear usuario
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <section class="tarjeta">
+
+        <h2>Usuarios registrados</h2>
+
+        <table>
+
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Rol</th>
+                <th>Activo</th>
+                <th>Acción</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr th:each="u : ${usuarios}">
+
+                <td th:text="${u.nombre}"></td>
+
+                <td th:text="${u.correo}"></td>
+
+                <td th:text="${u.rol.nombre}"></td>
+
+                <td th:text="${u.activo ? 'Sí' : 'No'}"></td>
+
+                <td>
+
+                    <span th:if="${u.correo == 'usadminrupe@rupe.com'}">
+                        Administrador protegido
+                    </span>
+
+                    <form th:if="${u.correo != 'usadminrupe@rupe.com'}"
+                          th:action="@{/admin/usuarios/{id}/activo(id=${u.id})}"
+                          method="post">
+
+                        <input type="hidden"
+                               name="activo"
+                               th:value="${!u.activo}">
+
+                        <button class="boton secundario"
+                                type="submit"
+                                th:text="${u.activo ? 'Desactivar' : 'Activar'}">
+                        </button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+        <br>
+
+        <a class="boton secundario"
+           href="/admin/dashboard">
+            Volver
+        </a>
+
+    </section>
 
 </main>
-<footer>RUPE</footer>
+
+<footer>RUPE - Proyecto Terminal II</footer>
+
 </body>
 </html>

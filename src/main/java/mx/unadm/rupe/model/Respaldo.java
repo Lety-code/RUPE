@@ -1,7 +1,8 @@
 package mx.unadm.rupe.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDateTime; 
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "respaldos")
@@ -32,4 +33,15 @@ public class Respaldo {
     public void setUsuario(String usuario) { this.usuario = usuario; }
     public LocalDateTime getFechaGeneracion() { return fechaGeneracion; }
     public void setFechaGeneracion(LocalDateTime fechaGeneracion) { this.fechaGeneracion = fechaGeneracion; }
+    
+    public String getFechaGeneracionFormateada() {
+    if (fechaGeneracion == null) {
+        return "";
+    }
+
+    DateTimeFormatter formato =
+            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+    return fechaGeneracion.format(formato);
+}
 }

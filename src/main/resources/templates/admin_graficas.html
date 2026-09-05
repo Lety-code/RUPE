@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>RUPE</title><link rel="stylesheet" href="/css/styles.css"></head>
 <body>
 <header class="encabezado">
@@ -17,13 +17,45 @@
 <section class="tarjeta">
     <h2>Gráficas administrativas</h2>
     <p>Resumen visual de reportes por estado.</p>
-    <div class="barra"><span>Abiertos</span><div><b th:style="'width:' + ${abiertos * 20 + 10} + 'px'" th:text="${abiertos}"></b></div></div>
-    <div class="barra"><span>Localizados</span><div><b th:style="'width:' + ${localizados * 20 + 10} + 'px'" th:text="${localizados}"></b></div></div>
-    <div class="barra"><span>Cerrados</span><div><b th:style="'width:' + ${cerrados * 20 + 10} + 'px'" th:text="${cerrados}"></b></div></div>
+<div class="barra">
+    <span>Abiertos</span>
+    <b th:style="'width:' + ${abiertos * 20 + 10} + 'px'"
+       th:text="${abiertos}"></b>
+</div>
+
+<div class="barra">
+    <span>En revisión</span>
+    <b th:style="'width:' + ${enRevision * 20 + 10} + 'px'"
+       th:text="${enRevision}"></b>
+</div>
+
+<div class="barra">
+    <span>Con pista</span>
+    <b th:style="'width:' + ${conPista * 20 + 10} + 'px'"
+       th:text="${conPista}"></b>
+</div>
+
+<div class="barra">
+    <span>Resguardados</span>
+    <b th:style="'width:' + ${resguardados * 20 + 10} + 'px'"
+       th:text="${resguardados}"></b>
+</div>
+
+<div class="barra">
+    <span>Localizados</span>
+    <b th:style="'width:' + ${localizados * 20 + 10} + 'px'"
+       th:text="${localizados}"></b>
+</div>
+
+<div class="barra">
+    <span>Cerrados</span>
+    <b th:style="'width:' + ${cerrados * 20 + 10} + 'px'"
+       th:text="${cerrados}"></b>
+</div>    
     <a class="boton secundario" href="/admin/dashboard">Volver</a>
 </section>
 
 </main>
-<footer>RUPE</footer>
+<footer>RUPE - Proyecto Terminal II</footer>
 </body>
 </html>

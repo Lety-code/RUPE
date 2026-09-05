@@ -1,7 +1,13 @@
 <!DOCTYPE html>
-<html lang="es">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>RUPE</title><link rel="stylesheet" href="/css/styles.css"></head>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUPE - Respaldos</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
 <body>
+
 <header class="encabezado">
     <h1>RUPE</h1>
     <p>Registro Único de Perros Extraviados</p>
@@ -12,25 +18,87 @@
         <a href="/admin/login">Administración</a>
     </nav>
 </header>
+
 <main class="contenedor">
 
-<section class="tarjeta">
-    <h2>Respaldos</h2>
-    <form method="post" action="/admin/respaldos">
-        <button class="boton" type="submit">Crear respaldo informativo</button>
-    </form>
-    <table>
-        <thead><tr><th>Archivo</th><th>Ruta</th><th>Usuario</th><th>Fecha</th></tr></thead>
-        <tbody>
-        <tr th:each="r : ${respaldos}">
-            <td th:text="${r.nombreArchivo}"></td><td th:text="${r.rutaArchivo}"></td><td th:text="${r.usuario}"></td><td th:text="${r.fechaGeneracion}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <a class="boton secundario" href="/admin/dashboard">Volver</a>
-</section>
+    <section class="tarjeta">
+        <h2>Respaldos</h2>
+
+        <div class="alerta exito"
+             th:if="${mensaje}"
+             th:text="${mensaje}"></div>
+
+        <div class="alerta error"
+             th:if="${error}"
+             th:text="${error}"></div>
+
+        <p>
+            Base de datos activa:
+            <strong th:text="${tipoBaseDatos != null ? tipoBaseDatos : 'DESCONOCIDA'}">
+                DESCONOCIDA
+            </strong>
+        </p>
+
+        <p th:if="${tipoBaseDatos == 'H2'}">
+            Modo LOCAL: el respaldo incluye la base H2 y la carpeta de fotografías/uploads.
+        </p>
+
+        <p th:if="${tipoBaseDatos == 'MYSQL'}">
+            Modo PRODUCCIÓN: el respaldo incluye la base MySQL y la carpeta de fotografías/uploads disponible en el servidor.
+        </p>
+
+        <form method="post" action="/admin/respaldos">
+            <button class="boton" type="submit">Crear respaldo completo</button>
+        </form>
+
+        <div style="overflow-x:auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Archivo</th>
+                        <th>Ruta</th>
+                        <th>Usuario</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:if="${respaldos == null or #lists.isEmpty(respaldos)}">
+                        <td colspan="5">Aún no hay respaldos registrados.</td>
+                    </tr>
+
+                    <tr th:each="r : ${respaldos}">
+                        <td th:text="${r.nombreArchivo}"></td>
+                        <td style="word-break:break-all;" th:text="${r.rutaArchivo}"></td>
+                        <td th:text="${r.usuario}"></td>
+                        <td th:text="${r.fechaGeneracionFormateada}"></td>
+                        <td>
+                            <span th:if="${!respaldosCompletos[r.id]}">
+                                No disponible
+                            </span>
+
+                            <span th:if="${respaldosCompletos[r.id] and respaldosRestaurablesLocalH2[r.id]}">
+                                Completo - restaurable en modo LOCAL con la utilidad segura
+                            </span>
+
+                            <span th:if="${respaldosCompletos[r.id] and !respaldosRestaurablesLocalH2[r.id]}">
+                                Respaldo completo
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="acciones">
+            <a class="boton secundario" href="/admin/dashboard">Volver</a>
+        </div>
+    </section>
 
 </main>
-<footer>RUPE</footer>
+
+<footer>RUPE - Proyecto Terminal II</footer>
+
 </body>
 </html>

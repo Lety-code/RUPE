@@ -51,8 +51,23 @@
         <label>Señas particulares *</label>
         <textarea name="senas" required rows="3" minlength="5" maxlength="300" title="Las señas son obligatorias. No use números ni signos."></textarea>
         <label>Fotografía del perro</label>
-        <input type="file" name="foto" accept="image/png,image/jpeg,image/webp">
+        <input type="file"
+       name="foto"
+       id="fotoPerro"
+       accept="image/png,image/jpeg,image/webp">
 
+        <div id="vistaPreviaPerro" style="display:none; margin-top:12px;">
+    <p><strong>Vista previa de la fotografía:</strong></p>
+
+    <img id="imagenPreviaPerro"
+         alt="Vista previa de la fotografía del perro"
+         style="max-width:220px;
+                max-height:180px;
+                object-fit:cover;
+                border-radius:8px;
+                border:1px solid #cccccc;">
+</div>
+        
         <h3>Datos del extravío</h3>
         <label>Fecha de extravío *</label>
         <input type="date" name="fechaExtravio" required min="1900-01-01" title="La fecha es obligatoria y debe tener año de 4 dígitos.">
@@ -65,6 +80,32 @@
 </section>
 
 </main>
-<footer>RUPE</footer>
+<footer>RUPE - Proyecto Terminal II</footer>
+
+<script>
+    const fotoPerro = document.getElementById("fotoPerro");
+    const vistaPreviaPerro = document.getElementById("vistaPreviaPerro");
+    const imagenPreviaPerro = document.getElementById("imagenPreviaPerro");
+
+    fotoPerro.addEventListener("change", function () {
+        const archivo = this.files[0];
+
+        if (!archivo) {
+            imagenPreviaPerro.src = "";
+            vistaPreviaPerro.style.display = "none";
+            return;
+        }
+
+        const lector = new FileReader();
+
+        lector.onload = function (evento) {
+            imagenPreviaPerro.src = evento.target.result;
+            vistaPreviaPerro.style.display = "block";
+        };
+
+        lector.readAsDataURL(archivo);
+    });
+</script>
+
 </body>
 </html>
