@@ -1,47 +1,137 @@
 package mx.unadm.rupe.util;
 
+import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ValidacionUtilTest {
 
     @Test
-    void colorNoAceptaNumeros() {
-        assertThrows(IllegalArgumentException.class, () -> ValidacionUtil.validarColor("Negro123"));
+    void textoAceptaAcentosEnieYGuion() {
+        assertDoesNotThrow(() ->
+                ValidacionUtil.validarTextoObligatorio(
+                        "José María-Luís",
+                        "Nombre"
+                )
+        );
     }
 
     @Test
-    void colorNoAceptaVacio() {
-        assertThrows(IllegalArgumentException.class, () -> ValidacionUtil.validarColor("   "));
+    void textoRechazaNumeros() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> ValidacionUtil.validarTextoObligatorio(
+                        "Nombre123",
+                        "Nombre"
+                )
+        );
     }
 
     @Test
-    void colorValido() {
-        assertDoesNotThrow(() -> ValidacionUtil.validarColor("Dorado"));
+    void telefonoAceptaDiezDigitos() {
+        assertDoesNotThrow(() ->
+                ValidacionUtil.validarTelefono("5569847512")
+        );
     }
 
     @Test
-    void senasNoAceptaSignos() {
-        assertThrows(IllegalArgumentException.class, () -> ValidacionUtil.validarSenas("Collar rojo!!!"));
+    void telefonoRechazaMenosDeDiezDigitos() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> ValidacionUtil.validarTelefono("55698475")
+        );
     }
 
     @Test
-    void senasNoAceptaVacio() {
-        assertThrows(IllegalArgumentException.class, () -> ValidacionUtil.validarSenas(""));
+    void telefonoRechazaLetras() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> ValidacionUtil.validarTelefono("55698A7512")
+        );
     }
 
     @Test
-    void fechaNoAceptaAnioConTresDigitos() {
-        assertThrows(IllegalArgumentException.class, () -> ValidacionUtil.validarFechaExtravio("026-08-04"));
+    void colorAceptaAcentosYEnie() {
+        assertDoesNotThrow(() ->
+                ValidacionUtil.validarColor("Café marrón")
+        );
     }
 
     @Test
-    void fechaNoAceptaVacio() {
-        assertThrows(IllegalArgumentException.class, () -> ValidacionUtil.validarFechaExtravio(""));
+    void colorRechazaNumeros() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> ValidacionUtil.validarColor("Café123")
+        );
     }
 
     @Test
-    void telefonoNoAceptaLetras() {
-        assertThrows(IllegalArgumentException.class, () -> ValidacionUtil.validarTelefono("55abc45678"));
+    void senasAceptaAcentosEnieComaPuntoYNumeros() {
+        assertDoesNotThrow(() ->
+                ValidacionUtil.validarSenas(
+                        "Cicatriz pequeña en pata, una oreja más oscura que la otra. Collar azul número 2."
+                )
+        );
+    }
+
+    @Test
+    void senasRechazaEtiquetasHtml() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> ValidacionUtil.validarSenas(
+                        "Tiene una mancha <script>alert('x')</script>"
+                )
+        );
+    }
+
+    @Test
+    void senasRechazaTextoMuyCorto() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> ValidacionUtil.validarSenas("abc")
+        );
+    }
+
+    @Test
+    void fechaAceptaFechaValidaNoFutura() {
+        String fecha =
+                LocalDate.now().minusDays(1).toString();
+
+        assertDoesNotThrow(() ->
+                ValidacionUtil.validarFechaExtravio(fecha)
+        );
+    }
+
+    @Test
+    void fechaRechazaFechaFutura() {
+        String fecha =
+                LocalDate.now().plusDays(1).toString();
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> ValidacionUtil.validarFechaExtravio(fecha)
+        );
+    }
+
+    @Test
+    void fechaRechazaFormatoIncorrecto() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> ValidacionUtil.validarFechaExtravio(
+                        "05/09/2026"
+                )
+        );
+    }
+
+    @Test
+    void estaVacioDetectaNuloVacioYEspacios() {
+        assertTrue(ValidacionUtil.estaVacio(null));
+        assertTrue(ValidacionUtil.estaVacio(""));
+        assertTrue(ValidacionUtil.estaVacio("   "));
+        assertFalse(ValidacionUtil.estaVacio("RUPE"));
     }
 }

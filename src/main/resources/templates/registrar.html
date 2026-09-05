@@ -20,9 +20,9 @@
     <form method="post" action="/reportes/guardar" class="formulario" enctype="multipart/form-data">
         <h3>Datos del tutor</h3>
         <label>Nombre del tutor *</label>
-        <input type="text" name="tutorNombre" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü\s]{2,120}" title="Escriba sólo letras y espacios.">
+        <input type="text" name="tutorNombre" required maxlength="120" autocomplete="name" title="Acepta letras, espacios, acentos, ñ, diéresis, guion y apóstrofe.">
         <label>Teléfono *</label>
-        <input type="tel" name="tutorTelefono" required pattern="[0-9]{10}" maxlength="10" title="Escriba 10 números.">
+        <input type="tel" name="tutorTelefono" required inputmode="numeric" autocomplete="tel" placeholder="10 dígitos" title="El teléfono debe contener exactamente 10 números.">
         <label>Correo electrónico</label>
         <input type="email" name="tutorCorreo" placeholder="correo@ejemplo.com">
         <label>Dirección</label>
@@ -30,11 +30,11 @@
 
         <h3>Datos del perro</h3>
         <label>Nombre del perro *</label>
-        <input type="text" name="perroNombre" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü\s]{2,80}" title="Escriba sólo letras y espacios.">
+        <input type="text" name="perroNombre" required maxlength="80" title="Acepta letras, espacios, acentos, ñ, diéresis, guion y apóstrofe.">
         <label>Raza</label>
-        <input type="text" name="raza" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü\s]{0,80}" title="Escriba sólo letras y espacios.">
+        <input type="text" name="raza" maxlength="80" title="Acepta letras, espacios, acentos, ñ, diéresis, guion y apóstrofe.">
         <label>Color *</label>
-        <input type="text" name="color" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü\s]{3,80}" title="El color es obligatorio y sólo acepta letras. No escriba números ni signos.">
+        <input type="text" name="color" required maxlength="80" title="Acepta letras, espacios, acentos, ñ, diéresis, guion y diagonal.">
         <label>Tamaño</label>
         <select name="tamano">
             <option value="">Seleccione</option>
@@ -49,7 +49,7 @@
             <option>Hembra</option>
         </select>
         <label>Señas particulares *</label>
-        <textarea name="senas" required rows="3" minlength="5" maxlength="300" title="Las señas son obligatorias. No use números ni signos."></textarea>
+        <textarea name="senas" required rows="3" minlength="5" maxlength="300" title="Describa las señas particulares. Se permiten acentos, ñ, números y signos comunes como punto, coma, guion y paréntesis."></textarea>
         <label>Fotografía del perro</label>
         <input type="file"
        name="foto"
@@ -80,7 +80,7 @@
 </section>
 
 </main>
-<footer>RUPE - Proyecto Terminal II</footer>
+<footer>RUPE - Proyecto Terminal II LRC.</footer>
 
 <script>
     const fotoPerro = document.getElementById("fotoPerro");

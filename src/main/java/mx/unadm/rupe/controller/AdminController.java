@@ -330,6 +330,8 @@ public class AdminController {
         List<ReporteExtravio> reportes = reporteService.listarReportes();
         PrintWriter writer = response.getWriter();
 
+        // BOM UTF-8 para que Excel reconozca correctamente acentos y la letra ñ.
+        writer.write('\uFEFF');
         writer.println("Folio,Estado,Fecha extravio,Lugar,Perro,Color");
 
         for (ReporteExtravio reporte : reportes) {
