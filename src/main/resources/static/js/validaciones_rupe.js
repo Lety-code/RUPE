@@ -220,7 +220,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (telefono) {
         telefono.addEventListener("input", validarTelefono);
-        telefono.addEventListener("blur", validarTelefono);
+        telefono.addEventListener("blur", function () {
+    const valido = validarTelefono();
+
+    if (!valido) {
+        telefono.reportValidity();
+    }
+});
         telefono.addEventListener("paste", function () {
             setTimeout(validarTelefono, 0);
         });
