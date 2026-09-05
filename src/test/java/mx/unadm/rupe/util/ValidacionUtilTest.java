@@ -134,4 +134,47 @@ class ValidacionUtilTest {
         assertTrue(ValidacionUtil.estaVacio("   "));
         assertFalse(ValidacionUtil.estaVacio("RUPE"));
     }
+        @Test
+    void colorV4AceptaGuionNormal() {
+        assertDoesNotThrow(() ->
+                ValidacionUtil.validarColor("Blanco-Negro")
+        );
+    }
+
+    @Test
+    void colorV4AceptaGuionBajo() {
+        assertDoesNotThrow(() ->
+                ValidacionUtil.validarColor("Blanco_Negro")
+        );
+    }
+
+    @Test
+    void colorV4AceptaDiagonal() {
+        assertDoesNotThrow(() ->
+                ValidacionUtil.validarColor("Blanco/Negro")
+        );
+    }
+
+    @Test
+    void colorV4AceptaCombinacionDeSignosPermitidos() {
+        assertDoesNotThrow(() ->
+                ValidacionUtil.validarColor(
+                        "Café-Blanco_Negro/Gris"
+                )
+        );
+    }
+
+    @Test
+    void colorV4RechazaSignosNoPermitidos() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> ValidacionUtil.validarColor(
+                        "Blanco@Negro#2"
+                )
+        );
+    }
+
 }
+    
+    
+
